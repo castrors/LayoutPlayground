@@ -17,6 +17,8 @@ class MainActivity : AppCompatActivity() {
         compoundLayout1 = findViewById(R.id.profile_1)
         compoundLayout2 = findViewById(R.id.profile_2)
 
+        compoundLayout1.isEnabled = false
+
         bindCompoundListener(compoundLayout1, R.string.audrey_hepburn)
         bindCompoundListener(compoundLayout2, R.string.doris_day)
 
