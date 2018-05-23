@@ -12,8 +12,8 @@
         android:id="@+id/radioLayoutGroup"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,11 +21,12 @@
         app:orientation="vertical">
 
         <io.github.castrors.layoutplayground.RadioLayout
-            android:id="@+id/profile_1"
+            android:id="@+id/recieveAtHomeGroup"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_margin="16dp"
             android:layout_weight="1"
-            android:background="@drawable/a_beautiful_selector"
+            android:background="@drawable/delivery_type_selector"
             android:elevation="2dp">
 
             <LinearLayout
@@ -34,28 +35,34 @@
                 android:gravity="center"
                 android:orientation="vertical">
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/audreyhepburn" />
+                    android:layout_width="46dp"
+                    android:layout_height="36dp"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/ic_bag" />
 
                 <TextView
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="#727272"
+                    android:textSize="20sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="AAAAAA" />
+                    android:text="Receba em casa" />
                 <TextView
+                    android:id="@+id/delivery_type_recieve_at_home"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="AAAAAA" />
+                    android:text="Frete: R$11,90" />
             </LinearLayout>
 
         </io.github.castrors.layoutplayground.RadioLayout>
 
         <io.github.castrors.layoutplayground.RadioLayout
-            android:id="@+id/profile_2"
+            android:id="@+id/retrieveByCarGroup"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_margin="16dp"
             android:layout_weight="1"
-            android:background="@drawable/a_beautiful_selector"
+            android:background="@drawable/delivery_type_selector"
             android:elevation="2dp">
 
             <LinearLayout
@@ -64,18 +71,23 @@
                 android:gravity="center"
                 android:orientation="vertical">
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/dorisday" />
+                    android:layout_width="80dp"
+                    android:layout_height="36dp"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/ic_car" />
 
                 <TextView
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="#727272"
+                    android:textSize="20sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="BBBBBB" />
+                    android:text="Retire de carro" />
                 <TextView
+                    android:id="@+id/delivery_type_retrieve_by_car"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="BBBBBB" />
+                    android:text="Frete: R$0,01" />
             </LinearLayout>
 
         </io.github.castrors.layoutplayground.RadioLayout>

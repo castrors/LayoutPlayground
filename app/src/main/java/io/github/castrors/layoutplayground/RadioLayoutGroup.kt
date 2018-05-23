@@ -52,7 +52,6 @@ class RadioLayoutGroup : LinearLayout {
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-
         if (checkedRadioLayoutId != -1) {
             mProtectFromCheckedChange = true
             setCheckedStateForView(checkedRadioLayoutId, true)
@@ -72,7 +71,6 @@ class RadioLayoutGroup : LinearLayout {
                 setCheckedId(child.id)
             }
         }
-
         super.addView(child, index, params)
     }
 
@@ -80,15 +78,12 @@ class RadioLayoutGroup : LinearLayout {
         if (id != -1 && id == checkedRadioLayoutId) {
             return
         }
-
         if (checkedRadioLayoutId != -1) {
             setCheckedStateForView(checkedRadioLayoutId, false)
         }
-
         if (id != -1) {
             setCheckedStateForView(id, true)
         }
-
         setCheckedId(id)
     }
 
@@ -108,10 +103,6 @@ class RadioLayoutGroup : LinearLayout {
 
     fun clearCheck() {
         check(-1)
-    }
-
-    fun setOnCheckedChangeListener(listener: OnCheckedChangeListener) {
-        mOnCheckedChangeListener = listener
     }
 
     override fun generateLayoutParams(attrs: AttributeSet): LayoutParams {
@@ -136,37 +127,33 @@ class RadioLayoutGroup : LinearLayout {
         info.className = RadioLayoutGroup::class.java.name
     }
 
-
     class LayoutParams : LinearLayout.LayoutParams {
         constructor(c: Context, attrs: AttributeSet) : super(c, attrs)
-
         constructor(w: Int, h: Int) : super(w, h)
 
-
-        override fun setBaseAttributes(a: TypedArray,
+        override fun setBaseAttributes(typedArray: TypedArray,
                                        widthAttr: Int, heightAttr: Int) {
 
-            if (a.hasValue(widthAttr)) {
-                width = a.getLayoutDimension(widthAttr, "layout_width")
+            width = if (typedArray.hasValue(widthAttr)) {
+                typedArray.getLayoutDimension(widthAttr, "layout_width")
             } else {
-                width = ViewGroup.LayoutParams.WRAP_CONTENT
+                ViewGroup.LayoutParams.WRAP_CONTENT
             }
 
-            if (a.hasValue(heightAttr)) {
-                height = a.getLayoutDimension(heightAttr, "layout_height")
+            height = if (typedArray.hasValue(heightAttr)) {
+                typedArray.getLayoutDimension(heightAttr, "layout_height")
             } else {
-                height = ViewGroup.LayoutParams.WRAP_CONTENT
+                ViewGroup.LayoutParams.WRAP_CONTENT
             }
         }
     }
 
     interface OnCheckedChangeListener {
-
         fun onCheckedChanged(group: RadioLayoutGroup, checkedId: Int)
     }
 
     private inner class CheckedStateTracker : CompoundLayout.OnCheckedChangeListener {
-        override fun onCheckedChanged(buttonView: CompoundLayout, isChecked: Boolean) {
+        override fun onCheckedChanged(compoundLayout: CompoundLayout, checked: Boolean) {
             if (mProtectFromCheckedChange) {
                 return
             }
@@ -177,7 +164,7 @@ class RadioLayoutGroup : LinearLayout {
             }
             mProtectFromCheckedChange = false
 
-            val id = buttonView.id
+            val id = compoundLayout.id
             setCheckedId(id)
         }
     }
@@ -195,7 +182,6 @@ class RadioLayoutGroup : LinearLayout {
                 child.setOnCheckedChangeWidgetListener(
                         mChildOnCheckedChangeListener)
             }
-
             mOnHierarchyChangeListener?.onChildViewAdded(parent, child)
         }
 
@@ -203,7 +189,6 @@ class RadioLayoutGroup : LinearLayout {
             if (parent === this@RadioLayoutGroup && child is RadioLayout) {
                 child.setOnCheckedChangeWidgetListener(null)
             }
-
             mOnHierarchyChangeListener?.onChildViewRemoved(parent, child)
         }
     }

@@ -1,37 +1,57 @@
 package io.github.castrors.layoutplayground
 
 import android.os.Bundle
-import android.support.annotation.StringRes
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.text.SpannableString
+import android.text.SpannableStringBuilder
+import android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+import android.text.style.ForegroundColorSpan
+import android.widget.Button
+import android.widget.TextView
 
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var compoundLayout1: CompoundLayout
-    private lateinit var compoundLayout2: CompoundLayout
+    private lateinit var radioLayoutGroup: RadioLayoutGroup
+    private lateinit var recieveAtHomeGroup: CompoundLayout
+    private lateinit var retrieveByCarGroup: CompoundLayout
+    private lateinit var recieveAtHome: TextView
+    private lateinit var retrieveByCar: TextView
+    private lateinit var button: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        compoundLayout1 = findViewById(R.id.profile_1)
-        compoundLayout2 = findViewById(R.id.profile_2)
+        radioLayoutGroup = findViewById(R.id.radioLayoutGroup)
+        recieveAtHomeGroup = findViewById(R.id.recieveAtHomeGroup)
+        retrieveByCarGroup = findViewById(R.id.retrieveByCarGroup)
+        recieveAtHome = findViewById(R.id.delivery_type_recieve_at_home)
+        retrieveByCar = findViewById(R.id.delivery_type_retrieve_by_car)
+        button = findViewById(R.id.button)
 
-        compoundLayout1.isEnabled = false
+        setupShippingSpannable(recieveAtHome, R.color.dark_gray)
+        setupShippingSpannable(retrieveByCar, R.color.apple_green)
 
-        bindCompoundListener(compoundLayout1, R.string.audrey_hepburn)
-        bindCompoundListener(compoundLayout2, R.string.doris_day)
-
-    }
-
-    private fun bindCompoundListener(compoundLayout: CompoundLayout, @StringRes subtitle: Int) {
-        compoundLayout.setOnCheckedChangeListener(object : CompoundLayout.OnCheckedChangeListener {
-            override fun onCheckedChanged(compoundLayout: CompoundLayout, checked: Boolean) {
-                if (checked) {
-                 //O COMPOUND FOI SELECIONADO
-                }
+        button.setOnClickListener {
+            when (radioLayoutGroup.checkedRadioLayoutId) {
+                R.id.recieveAtHomeGroup -> (it as Button).text = "AAAA"
+                R.id.retrieveByCarGroup -> (it as Button).text = "BBBB"
+                else -> (it as Button).text = "CCCC"
             }
-        })
+        }
     }
 
+    private fun setupShippingSpannable(view: TextView, color: Int) {
+        val shippingMethod = "Frete: "
+
+        val shippingSpan = SpannableString(view.text.toString())
+                shippingSpan.setSpan(ForegroundColorSpan(ContextCompat.getColor(this, color)),
+               shippingMethod.length,
+                view.text.length,
+                SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        view.text = SpannableStringBuilder().append(shippingSpan)
+    }
 }

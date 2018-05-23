@@ -94,14 +94,9 @@ open class CompoundLayout : FrameLayout, Checkable {
         return drawableState
     }
 
-    fun setOnCheckedChangeListener(onCheckedChangeListener: OnCheckedChangeListener) {
-        this.mOnCheckedChangeListener = onCheckedChangeListener
-    }
-
     internal fun setOnCheckedChangeWidgetListener(onCheckedChangeWidgetListener: OnCheckedChangeListener?) {
         this.mOnCheckedChangeWidgetListener = onCheckedChangeWidgetListener
     }
-
 
     interface OnCheckedChangeListener {
         fun onCheckedChanged(compoundLayout: CompoundLayout, checked: Boolean)
